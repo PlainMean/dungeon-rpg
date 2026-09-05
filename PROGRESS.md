@@ -70,8 +70,24 @@ Log of each loop iteration: what was done, what was learned, what surprised.
   build (394KB gzip) · e2e (390×844, zero console errors) · deploy.
 - Autosave on background/battle-end checked.
 
+## Iteration 4 — M7 asset pipeline (atlas + palette lock) (#5)
+
+- Wrote `config/scripts/gen_atlas.mjs` (pngjs): bakes pure-DB16 pixel art for every manifest id
+  (12 tile types + player + 5 enemies + 3 NPCs) into a single committed **atlas.png** (256×128,
+  3.5KB) and rewrites the manifest with real frame coordinates.
+- Rewired the Phaser renderer to **load the committed atlas** and slice per-id textures in
+  `create()` (via `preload()`), replacing runtime procedural generation — gameplay code still
+  only names sprite ids (`sprite("enemy.slime.0")`), so the atlas is a swappable backend.
+- Added `tests/unit/atlas.test.ts`: every frame in-bounds, none fully transparent/flat, every
+  pixel color a DB16 member, all entries point at the single atlas.
+- **42 tests pass**, tsc + lint clean, build bundles `atlas.png`. e2e green (zero console errors).
+- Screenshot-verified: coherent DB16 tile map (grass, stone floor, planks), hero, NPC, HUD.
+- **M7's "procedural first, committed, palette-locked, validated" half is done** — the asset
+  loop (build → generate → validate → play) now runs on real committed textures before any
+  external CC0 pack is considered.
+
 ## Still open
-- Real CC0 art atlas pass (M7), ZzFX audio/juice (M8), full-campaign solvability test (M9),
-  PWA/offline (M10), adversarial QA pass, REVIEW.md.
-- Equipment equip/unequip UI wiring (data + schema exist).
-- AGENTS.md manual creation (host-side protected-file guard blocked auto-write).
+- CC0 pack import (0x72/Kenney) behind the same pipeline, or keep the original procedural set.
+- ZzFX audio/juice (M8), full-campaign solvability test (M9), PWA/offline (M10), adversarial QA, REVIEW.md.
+- Equipment equip/unequip UI wiring.
+- Room to add idle/walk animation frames (`frames`/`fps` fields already in the manifest).

@@ -6,33 +6,14 @@ import Phaser from "phaser";
 import { SimRunner } from "./SimRunner";
 import { manifest as loadManifest } from "./manifest";
 import type { Manifest } from "../content/schemas";
-import { DB16_HEX8 } from "../content/palette";
 import { parseMap } from "../sim/map";
 import type { ParsedMap } from "../sim/map";
 import type { GameState } from "../sim/types";
+import atlasUrl from "../assets/atlas.png?url";
 
 export const TILE = 48; // 16px sprite @ 3x scale
 export let runningRunner: SimRunner | null = null;
 export function setRunner(r: SimRunner | null) { runningRunner = r; }
-
-/** Pick a DB16 color for a manifest id deterministically. */
-function colorFor(id: string): string {
-  let h = 0;
-  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
-  const palette = DB16_HEX8.slice(1); // skip near-black, use vivid range
-  return palette[h % palette.length];
-}
-function colorForTile(id: string): string {
-  if (id.includes("grass")) return "#6daa2c";
-  if (id.includes("forest")) return "#346524";
-  if (id.includes("water")) return "#597dce";
-  if (id.includes("road")) return "#854c30";
-  if (id.includes("sand")) return "#d2aa99";
-  if (id.includes("floor")) return "#757161";
-  if (id.includes("wall")) return "#442434";
-  if (id.includes("stairs")) return "#dad45e";
-  return "#442434";
-}
 
 export class PhaserWorld extends Phaser.Scene {
   private tilesLayer!: Phaser.GameObjects.Container;
@@ -46,8 +27,12 @@ export class PhaserWorld extends Phaser.Scene {
     super("world");
   }
 
+  preload() {
+    this.load.image("__atlas", atlasUrl);
+  }
+
   create() {
-    this.initTextures();
+    this.sliceAtlasTextures();
     this.tilesLayer = this.add.container(0, 0);
     this.player = this.add.sprite(0, 0, "player.down");
     this.player.setDepth(10);
@@ -100,48 +85,19 @@ export class PhaserWorld extends Phaser.Scene {
     this.drawWorld(this.runner.state);
   }
 
-  /** Generate one procedural texture per manifest entry. */
-  private initTextures() {
+  /** Slice per-id textures from the committed atlas (run after preload). */
+  private sliceAtlasTextures() {
     const manifest: Manifest = loadManifest();
-    const size = (id: string) => colorForTile(id);
+    const src = this.textures.get("__atlas").getSourceImage() as HTMLImageElement;
     for (const [id, entry] of Object.entries(manifest)) {
-      const w = entry.frame[2];
-      const h = entry.frame[3];
-      const key = id;
-      if (this.textures.exists(key)) continue;
-      let base: string;
-      if (id.startsWith("tile.")) base = size(id);
-      else {
-        base = colorFor(id);
-      }
-      const tex = this.textures.createCanvas(key, w, h);
+      if (this.textures.exists(id)) continue;
+      const [x, y, w, h] = entry.frame;
+      const tex = this.textures.createCanvas(id, w, h);
       if (!tex) continue;
       const ctx = tex.context;
-      ctx.fillStyle = base;
-      ctx.fillRect(0, 0, w, h);
-      // simple two-tone: darker lower edge for depth on tiles
-      ctx.fillStyle = shade(base, -0.25);
-      ctx.fillRect(0, Math.floor(h * 0.6), w, Math.ceil(h * 0.4));
-      // border for walkable look
-      ctx.fillStyle = shade(base, -0.4);
-      ctx.fillRect(0, 0, w, 1);
-      ctx.fillRect(0, h - 1, w, 1);
-      // eye for characters
-      if (!id.startsWith("tile.")) {
-        ctx.fillStyle = "#deeed6";
-        ctx.fillRect(Math.floor(w / 2) - 1, Math.floor(h * 0.3), 2, 2);
-      }
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(src, x, y, w, h, 0, 0, w, h);
       tex.refresh();
     }
   }
 }
-
-/** Lighten/darken a #rrggbb by a factor (-1..1). */
-function shade(hex: string, amt: number): string {
-  const n = parseInt(hex.slice(1), 16);
-  const r = clamp(Math.round(((n >> 16) & 255) * (1 + amt)));
-  const g = clamp(Math.round(((n >> 8) & 255) * (1 + amt)));
-  const b = clamp(Math.round((n & 255) * (1 + amt)));
-  return `#${((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1)}`;
-}
-function clamp(n: number) { return Math.min(255, Math.max(0, n)); }

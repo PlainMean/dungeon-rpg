@@ -42,9 +42,11 @@ Format: `[ ]` pending · `[x]` done · `[BLOCKER]` impediment.
 - [ ] Full hostile-recorded solvability test: overworld→floor1→floor2→floor3→boss→artifact→return
 
 ### M7 — CC0 art pass, palette lock, atlas packing
-- [ ] Import Kenney/0x72 CC0 packs; normalize to DB16+16px; pack atlas; validate
-- [x] CREDITS.md ledger present (procedural only so far)
-- [ ] Palette/atlas pixel validation tests (id resolution + schema already covered)
+- [x] Procedural DB16 atlas committed + manifest with real frames (`gen_atlas.mjs`)
+- [x] Renderer loads the committed atlas; art is a swappable backend behind manifest ids
+- [x] Atlas validation tests (bounds, non-empty, palette-lock) in `tests/unit/atlas.test.ts`
+- [x] CREDITS.md ledger covers every committed asset (atlas = original generated work)
+- [ ] (Optional) Swap in 0x72/Kenney CC0 packs through the same pipeline; or keep procedural set
 
 ### M8 — Audio, juice, screen shake, transitions
 - [ ] ZzFX sound effects + unlock on first tap

@@ -1,30 +1,350 @@
 {
-  "player.down":   { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
-  "player.up":     { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
-  "player.left":   { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
-  "player.right":  { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
-
-  "tile.grass.0":       { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.tallgrass.0":   { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.forest.0":      { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.water.0":       { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.sand.0":        { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.road.0":        { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.vfloor.0":      { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.wall.0":        { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.dfloor.0":      { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.dwall.0":       { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.bridge.0":      { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.stairs.up.0":   { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-  "tile.stairs.down.0": { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
-
-  "enemy.slime.0":    { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1, "anchor": [8, 14] },
-  "enemy.skeleton.0": { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
-  "enemy.cultist.0":  { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
-  "enemy.shade.0":    { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
-  "enemy.boss.0":     { "file": "placeholder", "frame": [0, 0, 24, 32], "frames": 1, "anchor": [12, 30] },
-
-  "npc.aldric.0":    { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
-  "npc.mara.0":      { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
-  "npc.brienne.0":   { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] }
+  "player.down": {
+    "file": "atlas.png",
+    "frame": [
+      8,
+      4,
+      16,
+      24
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      22
+    ],
+    "paletteLocked": true
+  },
+  "player.up": {
+    "file": "atlas.png",
+    "frame": [
+      40,
+      4,
+      16,
+      24
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      22
+    ],
+    "paletteLocked": true
+  },
+  "player.left": {
+    "file": "atlas.png",
+    "frame": [
+      72,
+      4,
+      16,
+      24
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      22
+    ],
+    "paletteLocked": true
+  },
+  "player.right": {
+    "file": "atlas.png",
+    "frame": [
+      104,
+      4,
+      16,
+      24
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      22
+    ],
+    "paletteLocked": true
+  },
+  "tile.grass.0": {
+    "file": "atlas.png",
+    "frame": [
+      136,
+      8,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.tallgrass.0": {
+    "file": "atlas.png",
+    "frame": [
+      168,
+      8,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.forest.0": {
+    "file": "atlas.png",
+    "frame": [
+      200,
+      8,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.water.0": {
+    "file": "atlas.png",
+    "frame": [
+      232,
+      8,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.sand.0": {
+    "file": "atlas.png",
+    "frame": [
+      8,
+      40,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.road.0": {
+    "file": "atlas.png",
+    "frame": [
+      40,
+      40,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.vfloor.0": {
+    "file": "atlas.png",
+    "frame": [
+      72,
+      40,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.wall.0": {
+    "file": "atlas.png",
+    "frame": [
+      104,
+      40,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.dfloor.0": {
+    "file": "atlas.png",
+    "frame": [
+      136,
+      40,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.dwall.0": {
+    "file": "atlas.png",
+    "frame": [
+      168,
+      40,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.bridge.0": {
+    "file": "atlas.png",
+    "frame": [
+      200,
+      40,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.stairs.up.0": {
+    "file": "atlas.png",
+    "frame": [
+      232,
+      40,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "tile.stairs.down.0": {
+    "file": "atlas.png",
+    "frame": [
+      8,
+      72,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "paletteLocked": true
+  },
+  "enemy.slime.0": {
+    "file": "atlas.png",
+    "frame": [
+      40,
+      72,
+      16,
+      16
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      14
+    ],
+    "paletteLocked": true
+  },
+  "enemy.skeleton.0": {
+    "file": "atlas.png",
+    "frame": [
+      72,
+      68,
+      16,
+      24
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      22
+    ],
+    "paletteLocked": true
+  },
+  "enemy.cultist.0": {
+    "file": "atlas.png",
+    "frame": [
+      104,
+      68,
+      16,
+      24
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      22
+    ],
+    "paletteLocked": true
+  },
+  "enemy.shade.0": {
+    "file": "atlas.png",
+    "frame": [
+      136,
+      68,
+      16,
+      24
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      22
+    ],
+    "paletteLocked": true
+  },
+  "enemy.boss.0": {
+    "file": "atlas.png",
+    "frame": [
+      164,
+      64,
+      24,
+      32
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      12,
+      30
+    ],
+    "paletteLocked": true
+  },
+  "npc.aldric.0": {
+    "file": "atlas.png",
+    "frame": [
+      200,
+      68,
+      16,
+      24
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      22
+    ],
+    "paletteLocked": true
+  },
+  "npc.mara.0": {
+    "file": "atlas.png",
+    "frame": [
+      232,
+      68,
+      16,
+      24
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      22
+    ],
+    "paletteLocked": true
+  },
+  "npc.brienne.0": {
+    "file": "atlas.png",
+    "frame": [
+      8,
+      100,
+      16,
+      24
+    ],
+    "frames": 1,
+    "fps": 6,
+    "anchor": [
+      8,
+      22
+    ],
+    "paletteLocked": true
+  }
 }

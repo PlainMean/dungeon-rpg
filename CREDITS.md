@@ -5,11 +5,16 @@ audio, or font files committed** yet, so there is nothing to attribute. This fil
 ledger; the rule is: **every asset file present must have a license entry here** (added the moment
 a real asset lands).
 
-## Current state (as of M0+ vertical slice)
+## Current assets committed
 
-- All textures are **procedurally generated at boot** by the renderer from the locked **DB16**
-  palette (DawnBringer 16, public-domain-derived color set) and the asset manifest. No source
-  image files exist → no attribution burden. Generated at runtime only; nothing committed.
+- **`src/assets/atlas.png`** — the single 256×128 atlas. Generated locally by
+  `config/scripts/gen_atlas.mjs` (seeded pure-DB16 pixel art; **original work, no external
+  sources**, so no attribution required). Locked to DB16, validated by `tests/unit/atlas.test.ts`.
+- **`src/assets/manifest.json`** — frame coordinates for every id in `atlas.png`.
+
+All textures are original procedurally-generated pixel art in the locked DB16 palette. No external
+image, audio, or font files are committed.
+
 - Sound: **none committed.** The spec calls for **ZzFX** (MIT) sound-as-code. Not yet added.
 - Fonts: system monospace fallback. No font file committed.
 
