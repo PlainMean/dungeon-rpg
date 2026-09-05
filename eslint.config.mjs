@@ -41,7 +41,7 @@ const renderGlobals = {
 };
 
 const nodeEnv = {
-  files: ["config/**/*.{ts,mjs}", "vite.config.ts", "vitest.config.ts", "playwright.config.ts", "tests/**/*.{ts,mjs}"],
+  files: ["config/**/*.{ts,mjs}", "scripts/**/*.mjs", "vite.config.ts", "vitest.config.ts", "playwright.config.ts", "tests/**/*.{ts,mjs}"],
   languageOptions: {
     globals: {
       process: "readonly", console: "readonly", Buffer: "readonly",
