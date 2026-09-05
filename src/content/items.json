@@ -1,0 +1,11 @@
+{
+  "potion":      { "id": "potion",      "name": "Healing Potion", "kind": "consumable", "sell": 15, "buy": 30, "desc": "Restores 40 HP.",          "healHp": 40,  "battleUse": true },
+  "ether":       { "id": "ether",       "name": "Ether",          "kind": "consumable", "sell": 20, "buy": 45, "desc": "Restores 15 MP.",          "healMp": 15,  "battleUse": true },
+  "herb":        { "id": "herb",        "name": "Herbs",          "kind": "consumable", "sell": 5,  "buy": 10, "desc": "Restores 15 HP.",          "healHp": 15,  "battleUse": true },
+  "bigpotion":   { "id": "bigpotion",   "name": "Greater Potion", "kind": "consumable", "sell": 40, "buy": 80, "desc": "Restores 90 HP.",          "healHp": 90,  "battleUse": true },
+  "ironsword":   { "id": "ironsword",   "name": "Iron Sword",     "kind": "weapon",     "sell": 60, "buy": 0,  "desc": "A sturdy blade. +6 ATK.", "atkBonus": 6 },
+  "steelsword":  { "id": "steelsword",  "name": "Steel Sword",    "kind": "weapon",     "sell": 140,"buy": 260,"desc": "Forged steel. +12 ATK.",    "atkBonus": 12 },
+  "leatherarmor":{"id": "leatherarmor","name": "Leather Armor",  "kind": "armor",      "sell": 40, "buy": 90, "desc": "Light protection. +4 DEF.", "defBonus": 4 },
+  "steelarmor":  { "id": "steelarmor",  "name": "Plate Armor",    "kind": "armor",      "sell": 120,"buy": 220,"desc": "Heavy plate. +9 DEF.",      "defBonus": 9 },
+  "sunstone":    { "id": "sunstone",    "name": "Sunstone",       "kind": "key",        "sell": 0,  "buy": 0,  "desc": "The stolen relic of Sunvale.", "questItem": true }
+}

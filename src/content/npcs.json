@@ -1,0 +1,44 @@
+{
+  "gatekeeper": {
+    "id": "gatekeeper",
+    "name": "Gatekeeper Aldric",
+    "heals": false,
+    "questId": "mainquest",
+    "dialogue": [
+      "Welcome to Sunvale, traveler. Our town has known brighter days.",
+      "Thieves of the dark broke in three nights past and took the Sunstone from the shrine.",
+      "They fled into the Sunken Crypt to the southeast. Without the Sunstone, our winter will be cruel."
+    ],
+    "questDialogue": {
+      "accepted": [
+        "The Crypt lies beyond the southeastern woods. Descend its three floors.",
+        "Defeat the horror at the bottom and bring the Sunstone back to me."
+      ],
+      "dungeon_cleared": [
+        "You have the Sunstone! Sunvale is saved. You are the hero we needed.",
+        "Thank you, traveler. The shrine shines once more."
+      ],
+      "complete": [
+        "The shrine is radiant again. You have our eternal gratitude."
+      ]
+    }
+  },
+  "shopkeeper": {
+    "id": "shopkeeper",
+    "name": "Mara",
+    "shop": "sunvale",
+    "heals": false,
+    "dialogue": [
+      "Buy what you need, friend. The Crypt is no place for the unprepared."
+    ]
+  },
+  "healer": {
+    "id": "healer",
+    "name": "Sister Brienne",
+    "heals": true,
+    "healCost": 15,
+    "dialogue": [
+      "The light mends the weary. Let me heal your wounds."
+    ]
+  }
+}

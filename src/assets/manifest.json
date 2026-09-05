@@ -1,0 +1,30 @@
+{
+  "player.down":   { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
+  "player.up":     { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
+  "player.left":   { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
+  "player.right":  { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
+
+  "tile.grass.0":       { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.tallgrass.0":   { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.forest.0":      { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.water.0":       { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.sand.0":        { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.road.0":        { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.vfloor.0":      { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.wall.0":        { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.dfloor.0":      { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.dwall.0":       { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.bridge.0":      { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.stairs.up.0":   { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+  "tile.stairs.down.0": { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1 },
+
+  "enemy.slime.0":    { "file": "placeholder", "frame": [0, 0, 16, 16], "frames": 1, "anchor": [8, 14] },
+  "enemy.skeleton.0": { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
+  "enemy.cultist.0":  { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
+  "enemy.shade.0":    { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
+  "enemy.boss.0":     { "file": "placeholder", "frame": [0, 0, 24, 32], "frames": 1, "anchor": [12, 30] },
+
+  "npc.aldric.0":    { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
+  "npc.mara.0":      { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] },
+  "npc.brienne.0":   { "file": "placeholder", "frame": [0, 0, 16, 24], "frames": 1, "anchor": [8, 22] }
+}

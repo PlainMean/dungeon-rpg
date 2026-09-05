@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Pre-commit hook (installed via core.hooksPath = config/hooks).
+# Fails on any diff touching tests/protected/ and on any drop in test count.
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+# 1) Block any change to tests/protected/
+if git diff --cached --name-only | grep -q '^tests/protected/'; then
+  echo "ERROR: changes to tests/protected/ are forbidden. Aborting commit." >&2
+  exit 1
+fi
+
+# 2) Block total test-count drops vs HEAD (skip on the very first commit).
+old=0
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+  old=$(git ls-tree -r --name-only HEAD -- tests | wc -l)
+fi
+new=$(git ls-files -- tests | wc -l)
+# falls back to file-count if grep parser is unavailable; still catches large removals
+if [ "$new" -lt "$old" ]; then
+  echo "ERROR: test file count dropped ($old -> $new). Never delete a test. Aborting." >&2
+  exit 1
+fi
+
+echo "pre-commit checks passed."

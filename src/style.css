@@ -1,0 +1,160 @@
+:root {
+  --bg: #140c1c;
+  --panel: #442434;
+  --ink: #deeed6;
+  --gold: #dad45e;
+  --hp: #d04648;
+  --mp: #597dce;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#game-root {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* HUD */
+.hud {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: calc(env(safe-area-inset-top, 0px) + 8px) 12px 8px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  background: linear-gradient(#140c1ccc, transparent);
+  z-index: 30;
+  pointer-events: none;
+}
+.hud-stats { display: contents; }
+.hud-name { font-weight: bold; }
+.hud-lv { color: var(--gold); }
+.bar { height: 12px; width: 90px; background: #00000088; border-radius: 6px; overflow: hidden; align-self: center; }
+.bar i { display: block; height: 100%; }
+.bar.hp i { background: var(--hp); }
+.bar.mp i { background: var(--mp); }
+.hud-message {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 44px);
+  left: 12px; right: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #deeed6;
+  background: #140c1caa;
+  padding: 6px 10px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+/* World controls */
+.world-controls {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  pointer-events: none;
+}
+.dpad {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+  left: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 56px);
+  grid-template-rows: repeat(3, 56px);
+  pointer-events: auto;
+}
+.d-btn {
+  width: 56px; height: 56px;
+  font-size: 18px;
+  border: 1px solid #deeed655;
+  background: #00000055;
+  color: var(--ink);
+  border-radius: 12px;
+  touch-action: none;
+}
+.d-btn.up { grid-column: 2; grid-row: 1; }
+.d-btn.left { grid-column: 1; grid-row: 2; }
+.d-btn.down { grid-column: 2; grid-row: 2; }
+.d-btn.right { grid-column: 3; grid-row: 2; }
+.btn-interact {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 40px);
+  right: 32px;
+  width: 72px; height: 72px;
+  font-size: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: #d0464888;
+  color: var(--ink);
+  pointer-events: auto;
+}
+
+/* Modal */
+.modal {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000aa;
+  padding: 20px;
+  overflow-y: auto;
+}
+.battle-panel, .dialogue, .shop, .menu, .end-screen {
+  width: 100%;
+  background: var(--panel);
+  border: 2px solid var(--gold);
+  border-radius: 14px;
+  padding: 16px;
+  max-width: 360px;
+}
+h1, h2, h3 { margin: 4px 0; }
+.enemies { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+.enemy { background: #00000044; padding: 6px 8px; border-radius: 8px; }
+.enemy.dead { opacity: 0.4; text-decoration: line-through; }
+.enemy span { float: right; }
+.battle-log { min-height: 48px; background: #00000044; border-radius: 8px; padding: 6px; font-size: 13px; margin-bottom: 8px; }
+.battle-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.act, .skill-btn, .item-btn {
+  padding: 14px 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #deeed655;
+  background: #757161;
+  color: var(--bg);
+  touch-action: manipulation;
+}
+.skill-btn, .item-btn {
+  background: #597dce;
+  color: var(--ink);
+  margin: 4px 4px 0 0;
+}
+.battle-submenu { margin-top: 8px; }
+.dialog-name { color: var(--gold); font-weight: bold; }
+.dialog-text { margin: 8px 0; min-height: 40px; font-size: 15px; line-height: 1.4; }
+.dialog-hint { color: #deeed688; font-size: 12px; }
+.shop-item { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 6px 0; }
+.shop-item button { min-width: 64px; padding: 8px; }
+.shop-list { max-height: 180px; overflow-y: auto; }
+.menu ul { margin: 4px 0 4px 16px; }
+.end-screen { text-align: center; }
+.tiny { font-size: 12px; color: #deeed688; margin-top: 12px; }
+
+button:disabled { opacity: 0.4; }

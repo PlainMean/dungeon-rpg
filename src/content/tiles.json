@@ -1,0 +1,15 @@
+{
+  "grass":       { "sprite": "tile.grass.0",       "solid": false, "category": "grass",    "encounter": true },
+  "tallgrass":   { "sprite": "tile.tallgrass.0",   "solid": false, "category": "grass",    "encounter": true },
+  "forest":      { "sprite": "tile.forest.0",      "solid": true,  "category": "forest",   "encounter": false },
+  "water":       { "sprite": "tile.water.0",       "solid": true,  "category": "water",    "encounter": false },
+  "sand":        { "sprite": "tile.sand.0",        "solid": false, "category": "sand",     "encounter": false },
+  "road":        { "sprite": "tile.road.0",        "solid": false, "category": "road",     "encounter": false },
+  "vfloor":      { "sprite": "tile.vfloor.0",      "solid": false, "category": "dungeon_floor", "encounter": false },
+  "wall":        { "sprite": "tile.wall.0",        "solid": true,  "category": "wall",     "encounter": false },
+  "dfloor":      { "sprite": "tile.dfloor.0",      "solid": false, "category": "dungeon_floor", "encounter": true },
+  "dwall":       { "sprite": "tile.dwall.0",       "solid": true,  "category": "dungeon_wall", "encounter": false },
+  "bridge":      { "sprite": "tile.bridge.0",      "solid": false, "category": "bridge",   "encounter": false },
+  "stairs_up":   { "sprite": "tile.stairs.up.0",   "solid": false, "category": "stairs_up",   "encounter": false },
+  "stairs_down": { "sprite": "tile.stairs.down.0", "solid": false, "category": "stairs_down", "encounter": false }
+}

@@ -1,0 +1,7 @@
+{
+  "overworld": { "weights": { "slime": 70, "skeleton": 30 }, "countMin": 1, "countMax": 2 },
+  "floor1":    { "weights": { "slime": 45, "skeleton": 55 }, "countMin": 1, "countMax": 2 },
+  "floor2":    { "weights": { "skeleton": 50, "cultist": 50 }, "countMin": 1, "countMax": 3 },
+  "floor3":    { "weights": { "cultist": 55, "shade": 45 }, "countMin": 2, "countMax": 3 },
+  "boss":      { "weights": { "boss": 100 }, "countMin": 1, "countMax": 1 }
+}

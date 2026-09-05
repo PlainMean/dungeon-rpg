@@ -1,0 +1,12 @@
+[
+  { "level": 1, "xpToNext": 30,  "atk": 6,  "def": 3,  "maxHp": 40,  "maxMp": 12, "learns": ["flamestrike"] },
+  { "level": 2, "xpToNext": 45,  "atk": 7,  "def": 4,  "maxHp": 48,  "maxMp": 14, "learns": [] },
+  { "level": 3, "xpToNext": 70,  "atk": 8,  "def": 5,  "maxHp": 56,  "maxMp": 16, "learns": [] },
+  { "level": 4, "xpToNext": 100, "atk": 10, "def": 6,  "maxHp": 65,  "maxMp": 18, "learns": [] },
+  { "level": 5, "xpToNext": 140, "atk": 12, "def": 7,  "maxHp": 75,  "maxMp": 21, "learns": ["heal"] },
+  { "level": 6, "xpToNext": 190, "atk": 14, "def": 8,  "maxHp": 86,  "maxMp": 24, "learns": [] },
+  { "level": 7, "xpToNext": 250, "atk": 16, "def": 10, "maxHp": 98,  "maxMp": 27, "learns": [] },
+  { "level": 8, "xpToNext": 320, "atk": 19, "def": 12, "maxHp": 111, "maxMp": 30, "learns": [] },
+  { "level": 9, "xpToNext": 400, "atk": 22, "def": 14, "maxHp": 125, "maxMp": 34, "learns": [] },
+  { "level": 10, "xpToNext": 0,  "atk": 26, "def": 17, "maxHp": 140, "maxMp": 40, "learns": [] }
+]

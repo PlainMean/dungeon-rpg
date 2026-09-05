@@ -1,0 +1,9 @@
+{
+  "sunvale": {
+    "name": "Sunvale Goods",
+    "items": ["potion", "bigpotion", "ether", "ironsword", "steelarmor"],
+    "buyPrices": {
+      "ironsword": 120
+    }
+  }
+}

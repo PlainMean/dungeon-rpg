@@ -1,0 +1,12 @@
+{
+  "mainquest": {
+    "id": "mainquest",
+    "name": "The Stolen Sunstone",
+    "stages": [
+      { "id": "none", "desc": "Talk to the Gatekeeper in Sunvale to begin." },
+      { "id": "accepted", "desc": "Enter the Sunken Crypt and retrieve the Sunstone from its depths." },
+      { "id": "dungeon_cleared", "desc": "Return to the Gatekeeper in Sunvale with the Sunstone." },
+      { "id": "complete", "desc": "The Sunstone is restored. Sunvale is saved!" }
+    ]
+  }
+}

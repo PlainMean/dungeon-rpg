@@ -1,0 +1,5 @@
+{
+  "flamestrike": { "id": "flamestrike", "name": "Flame Strike", "mpCost": 5, "power": 18, "target": "enemy", "kind": "magic" },
+  "heal":        { "id": "heal",        "name": "Light Heal",   "mpCost": 4, "power": 0,  "target": "self", "kind": "heal", "healHp": 40 },
+  "darkblast":   { "id": "darkblast",   "name": "Dark Lance",   "mpCost": 0, "power": 14, "target": "enemy", "kind": "magic" }
+}
