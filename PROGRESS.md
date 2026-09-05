@@ -50,9 +50,28 @@ Log of each loop iteration: what was done, what was learned, what surprised.
   camera/procedural art ✓; M2 content schemas + save round-trip ✓ (autosave wiring pending);
   M3 combat ✓; M4 items+shop partial; M5 dialogue+quest ✓; M6 dungeon gen w/ per-floor BFS ✓).
 
+## Iteration 3 — Deploy + live verification (#4)
+
+- Wired autosave: save to localStorage on `visibilitychange` (hidden) and after each resolved
+  battle; fixed the pre-commit hook to tolerate an unborn HEAD (first commit).
+- Wrote README.md; committed and pushed to GitHub → repo **PlainMean/dungeon-rpg** (public).
+- Enabled GitHub Pages (Actions source); CI+Deploy workflow ran clean: the **test** job (full
+  pyramid) passed and **gated** the deploy — `actions/deploy-pages` succeeded in 31s.
+- Verified the deployed build against the real base path: index HTTP 200 with correct title,
+  JS bundle resolves at `/dungeon-rpg/assets/…`, and a Playwright run against the live URL
+  boots the game at 390×844 touch with **zero console errors**.
+- **This closes M0 end-to-end** and the DoD item "deployed build verified against the real
+  base path, not just dev server."
+
+## Current status
+
+- **Live at** https://plainmean.github.io/dungeon-rpg/ — playable in a mobile browser.
+- **Green conveyor on every commit** (CI): tsc · lint · 38 unit/property/replay · 6 soak ·
+  build (394KB gzip) · e2e (390×844, zero console errors) · deploy.
+- Autosave on background/battle-end checked.
+
 ## Still open
-- Commit + push + GitHub Pages deploy + verify deployed subpath.
-- Real CC0 art atlas pass (M7), ZzFX audio/juice (M8), balance/full-campaign-solvability test (M9),
+- Real CC0 art atlas pass (M7), ZzFX audio/juice (M8), full-campaign solvability test (M9),
   PWA/offline (M10), adversarial QA pass, REVIEW.md.
-- Wire autosave on `visibilitychange` + save/load from boot.
-- AGENTS.md manual creation.
+- Equipment equip/unequip UI wiring (data + schema exist).
+- AGENTS.md manual creation (host-side protected-file guard blocked auto-write).

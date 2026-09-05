@@ -7,10 +7,11 @@ Format: `[ ]` pending · `[x]` done · `[BLOCKER]` impediment.
 ### M0 — Walking skeleton (deploy first)
 - [x] Scaffold repo: stack installed, versions pinned in DECISIONS.md
 - [x] SPEC.md, BACKLOG.md, PROGRESS.md, DECISIONS.md written (AGENTS.md host-blocked → task)
-- [x] GitHub Actions: npm ci → full tests → build → deploy Pages; tests gate deploy
+- [x] GitHub Actions: npm ci → full tests → build → deploy Pages; tests gate deploy (verified live)
 - [x] Pre-commit hook: block tests/protected diffs + test-count drops (hook installed)
 - [x] Empty tile map renders; player moves by touch; build + e2e green
-- [ ] Push to GitHub and verify the **deployed** Pages subpath (pending)
+- [x] Pushed to GitHub; GitHub Pages deploy **verified live** at /dungeon-rpg/ (HTTP 200, zero console errors)
+- [x] Autosave on `visibilitychange` + after battle (wired in renderer)
 
 ### M1 — Tilemap, collision, camera, procedural art
 - [x] Procedural placeholder tile + actor textures generated at boot from manifest/DB16
@@ -19,7 +20,7 @@ Format: `[ ]` pending · `[x]` done · `[BLOCKER]` impediment.
 ### M2 — Save/load + content schemas
 - [x] Zod schemas for all content JSON + manifest
 - [x] serialize/deserialize round-trip to identical GameState (pure) + corrupted-save clamping
-- [ ] Autosave on `visibilitychange` and after battle (wire renderer localStorage)
+- [x] Autosave on `visibilitychange` and after battle (renderer localStorage)
 - [x] Replay log format + deterministic replay tests
 
 ### M3 — Turn-based combat
