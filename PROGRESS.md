@@ -86,8 +86,22 @@ Log of each loop iteration: what was done, what was learned, what surprised.
   loop (build → generate → validate → play) now runs on real committed textures before any
   external CC0 pack is considered.
 
+## Iteration 5 — Equipment and campaign completion (#6)
+
+- Added `equipItem` / `unequipItem` commands. Menu actions now update `hero.weapon` /
+  `hero.armor` and inventory `equipped` flags through pure deterministic reducer logic; combat
+  effective ATK/DEF immediately reflects the selected gear.
+- Added touch-friendly equipment rows with equip/unequip buttons and item descriptions, reachable
+  from the new Menu touch button. D-pad movement now stops on pointer cancellation or capture
+  loss instead of leaving a walk timer active.
+- Added equipment state tests and a full headless replay test for seed 2026. The replay traverses
+  overworld → all three dungeon floors → boss → Sunstone pickup → overworld return → Gatekeeper
+  turn-in, then repeats the same command decisions and compares the final state hash.
+- Fixed two campaign blockers exposed by the replay: the overworld entrance was enclosed by
+  solid tiles, and boss completion did not set `quest.hasSunstone`.
+- Verification: tsc ✓, lint ✓, 47 unit/property/replay tests ✓, 6 soak tests ✓, build ✓, e2e 2 ✓.
+
 ## Still open
 - CC0 pack import (0x72/Kenney) behind the same pipeline, or keep the original procedural set.
-- ZzFX audio/juice (M8), full-campaign solvability test (M9), PWA/offline (M10), adversarial QA, REVIEW.md.
-- Equipment equip/unequip UI wiring.
+- ZzFX audio/juice (M8), multi-seed full-campaign soak (M9), PWA/offline (M10), adversarial QA, REVIEW.md.
 - Room to add idle/walk animation frames (`frames`/`fps` fields already in the manifest).

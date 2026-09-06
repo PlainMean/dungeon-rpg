@@ -9,7 +9,7 @@ import { cachedWorld, newGame } from "./newgame";
 import type { Content, OverworldMapData } from "../content/schemas";
 import { stepBattle, startBattle } from "./combat";
 import { grantXp } from "./leveling";
-import { addItems, removeItems, countOf } from "./inventory";
+import { addItems, removeItems, countOf, tryEquip, tryUnequip } from "./inventory";
 import { chance } from "./prng";
 import { encounterSetup } from "./dungeon";
 
@@ -133,7 +133,7 @@ function applyVictory(s: GameState, battle: BattleState): GameState {
 
   if (s.field.mapId === "floor3" && battle.enemies.some((e) => e.id === "boss") && !flags.bossDefeated) {
     flags = { ...flags, bossDefeated: true };
-    quest = { ...quest, dungeonCleared: true, stage: "dungeon_cleared" };
+    quest = { ...quest, dungeonCleared: true, hasSunstone: true, stage: "dungeon_cleared" };
     if (countOf(inv, "sunstone") === 0) inv = addItems(inv, "sunstone", 1, world).inventory;
     message = "The Dread falls! You claim the Sunstone.";
   }
@@ -164,7 +164,7 @@ function dialogueCommand(s: GameState, cmd: Command): GameState {
     }
     // ---- last line ----
     // quest completion (already have the Sunstone)
-    if (npc?.questId && s.quest.stage === "dungeon_cleared") {
+    if (npc?.questId && s.quest.stage === "dungeon_cleared" && s.quest.hasSunstone) {
       return {
         ...s,
         dialogue: null,
@@ -226,7 +226,31 @@ function shopCommand(s: GameState, cmd: Command): GameState {
 }
 
 function menuCommand(s: GameState, cmd: Command): GameState {
+  const world = cachedWorld(s.seed);
   if (cmd.type === "toggleMenu") return { ...s, mode: "field" };
+  if (cmd.type === "equipItem") {
+    const item = world.items[cmd.itemId];
+    if (!item || (item.kind !== "weapon" && item.kind !== "armor")) {
+      return withMessage(s, "That item cannot be equipped.");
+    }
+    const result = tryEquip(s.inventory, item.kind, cmd.itemId, world);
+    if (!result.equipped) return withMessage(s, "You do not have that equipment.");
+    return {
+      ...s,
+      hero: { ...s.hero, [item.kind]: result.equipped },
+      inventory: result.inventory,
+      message: `${item.name} equipped.`,
+    };
+  }
+  if (cmd.type === "unequipItem") {
+    if (!s.hero[cmd.slot]) return withMessage(s, `No ${cmd.slot} equipped.`);
+    return {
+      ...s,
+      hero: { ...s.hero, [cmd.slot]: null },
+      inventory: tryUnequip(s.inventory, cmd.slot, world),
+      message: `${cmd.slot === "weapon" ? "Weapon" : "Armor"} unequipped.`,
+    };
+  }
   return s;
 }
 

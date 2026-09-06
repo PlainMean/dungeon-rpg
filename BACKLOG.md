@@ -30,7 +30,7 @@ Format: `[ ]` pending · `[x]` done · `[BLOCKER]` impediment.
 
 ### M4 — Inventory, items, equipment, shops
 - [x] Inventory capacity/stacks; consumables usable in battle; shop buy/sell UI
-- [ ] Equipment equip/unequip in menu (data + schema exist; not wired to hero.weapon/armor UI)
+- [x] Equipment equip/unequip in menu (data + schema exist; deterministic sim commands and touch UI)
 
 ### M5 — Dialogue, NPCs, quest machine
 - [x] Dialogue state machine (signposts, NPCs); healer; quest accept/complete → victory
@@ -39,7 +39,7 @@ Format: `[ ]` pending · `[x]` done · `[BLOCKER]` impediment.
 ### M6 — Dungeon generation + solvability
 - [x] 3-floor seeded dungeon generator; stairs transitions; floor-specific encounters
 - [x] Per-floor BFS guarantees start→exit reachable
-- [ ] Full hostile-recorded solvability test: overworld→floor1→floor2→floor3→boss→artifact→return
+- [x] Full headless replay: overworld→floor1→floor2→floor3→boss→Sunstone→return
 
 ### M7 — CC0 art pass, palette lock, atlas packing
 - [x] Procedural DB16 atlas committed + manifest with real frames (`gen_atlas.mjs`)

@@ -19,6 +19,8 @@ export type Command =
   // --- dialogue / menus ---
   | { type: "dialogueNext" }
   | { type: "dialogueChoice"; choice: number }
+  | { type: "equipItem"; itemId: string }
+  | { type: "unequipItem"; slot: "weapon" | "armor" }
   // --- shop ---
   | { type: "shopBuy"; itemId: string; count?: number }
   | { type: "shopSell"; itemId: string; count?: number }

@@ -80,6 +80,7 @@ export class DOMUI {
         <button class="d-btn right" data-dir="right">▶</button>
       </div>
       <button id="btn-interact" class="btn-interact">✦</button>
+      <button id="btn-menu" class="btn-menu">Menu</button>
     `;
     this.wireDpad(ctl);
     // Modal overlay
@@ -110,17 +111,21 @@ export class DOMUI {
       b.addEventListener("pointerdown", start);
       b.addEventListener("pointerup", release);
       b.addEventListener("pointerleave", release);
+      b.addEventListener("pointercancel", release);
+      b.addEventListener("lostpointercapture", release);
     });
     const interact = ctl.querySelector("#btn-interact") as HTMLButtonElement;
     interact.addEventListener("click", () => this.runner.send({ type: "interact" }));
+    const menu = ctl.querySelector("#btn-menu") as HTMLButtonElement;
+    menu.addEventListener("click", () => this.runner.send({ type: "toggleMenu" }));
   }
 
   // ---------------------------------------------------------------- render
   render(s: GameState) {
     // Gate DOM work behind a signature so we don't rebuild modal HTML at 60fps.
     const sig = JSON.stringify([
-      s.mode, s.tick, s.hero.hp, s.hero.mp, s.hero.level, s.gold, s.message,
-      s.quest.stage, s.dialogue?.lineIndex, s.shop?.name,
+      s.mode, s.tick, s.hero.hp, s.hero.mp, s.hero.level, s.hero.weapon, s.hero.armor,
+      s.gold, s.message, s.quest.stage, s.dialogue?.lineIndex, s.shop?.name,
       s.battle?.enemies.map((e) => e.hp).join(","),
       s.battle?.log[s.battle.log.length - 1],
     ]);
@@ -243,13 +248,40 @@ export class DOMUI {
 
   // ------------------------------------------------------- menu
   private renderMenu(s: GameState) {
+    const equipment = s.inventory
+      .filter((i) => {
+        const kind = this.runner.world.items[i.id]?.kind;
+        return i.count > 0 && (kind === "weapon" || kind === "armor");
+      })
+      .map((i) => {
+        const item = this.runner.world.items[i.id]!;
+        const slot = item.kind as "weapon" | "armor";
+        const equipped = s.hero[slot] === i.id;
+        return `<div class="equipment-row">
+          <span><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.desc)}</small></span>
+          ${equipped
+            ? `<button class="equipment-unequip" data-slot="${slot}">Unequip</button>`
+            : `<button class="equipment-equip" data-item="${escapeHtml(i.id)}">Equip</button>`}
+        </div>`;
+      })
+      .join("");
+    const weapon = s.hero.weapon ? this.runner.world.items[s.hero.weapon]?.name : "none";
+    const armor = s.hero.armor ? this.runner.world.items[s.hero.armor]?.name : "none";
     this.showModal(`
       <div class="menu">
         <h2>Menu</h2>
+        <section class="equipment">
+          <h3>Equipment</h3>
+          <p>Weapon: ${escapeHtml(weapon ?? "none")}</p>
+          <p>Armor: ${escapeHtml(armor ?? "none")}</p>
+          ${equipment || "<p class=\"muted\">No equipment owned yet.</p>"}
+        </section>
         <p>Items:</p><ul>
-          ${s.inventory.map((i) => { const it = this.runner.world.items[i.id!]; return `<li>${it?.name ?? i.id} x${i.count}</li>`; }).join("")}
+          ${s.inventory.map((i) => {
+            const it = this.runner.world.items[i.id];
+            return `<li>${escapeHtml(it?.name ?? i.id)} x${i.count}</li>`;
+          }).join("")}
         </ul>
-        <p>Weapon: ${s.hero.weapon ? this.runner.world.items[s.hero.weapon]?.name : "none"} | Armor: ${s.hero.armor ? this.runner.world.items[s.hero.armor]?.name : "none"}</p>
         <p>Quest: ${questText(s)}</p>
         <div class="battle-actions">
           <button class="act" data-save="1">Save</button>
@@ -257,6 +289,8 @@ export class DOMUI {
         </div>
       </div>
     `);
+    this.bind(this.modal, ".equipment-equip", (btn) => this.runner.send({ type: "equipItem", itemId: btn.dataset.item! }));
+    this.bind(this.modal, ".equipment-unequip", (btn) => this.runner.send({ type: "unequipItem", slot: btn.dataset.slot as "weapon" | "armor" }));
     this.bind(this.modal, "[data-save]", () => { localStorage.setItem(SAVE_KEY, serialize(this.runner.state)); this.showToast("Game saved."); });
     this.bind(this.modal, "[data-resume]", () => this.runner.send({ type: "toggleMenu" }));
   }

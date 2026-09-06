@@ -59,7 +59,7 @@ export function removeItems(
   return result;
 }
 
-/** Give an equipment item to the hero if it improves the slot; returns new inventory + equipped id. */
+/** Equip an owned equipment item and clear any other item in the same slot. */
 export function tryEquip(
   inventory: readonly InventoryItem[],
   equipSlot: "weapon" | "armor",
@@ -67,21 +67,34 @@ export function tryEquip(
   content: Content,
 ): { inventory: InventoryItem[]; equipped: string | null } {
   const item = content.items[id];
-  if (!item || (item.kind !== "weapon" && item.kind !== "armor")) return { inventory: [...inventory], equipped: null };
-  const slotKind: "weapon" | "armor" = item.kind === "weapon" ? "weapon" : "armor";
-  if (slotKind !== equipSlot) return { inventory: [...inventory], equipped: null };
-  const next = inventory.map((it) => ({ ...it, equipped: it.equipped && equipSlot !== slotKind ? it.equipped : it.id === id }));
-  // unequip any other item in that slot
-  for (const it of next) {
-    if (it.id !== id && it.equipped && (content.items[it.id]?.kind === slotKind)) it.equipped = false;
+  if (
+    !item ||
+    item.kind !== equipSlot ||
+    !inventory.some((it) => it.id === id && it.count > 0)
+  ) {
+    return { inventory: inventory.map((it) => ({ ...it })), equipped: null };
   }
+  const next = inventory.map((it) => {
+    const kind = content.items[it.id]?.kind;
+    return { ...it, equipped: kind === equipSlot ? it.id === id : it.equipped };
+  });
   return { inventory: next, equipped: id };
 }
 
+/** Unequip every owned item in a slot and return the cleared inventory. */
+export function tryUnequip(
+  inventory: readonly InventoryItem[],
+  equipSlot: "weapon" | "armor",
+  content: Content,
+): InventoryItem[] {
+  return inventory.map((it) => (
+    content.items[it.id]?.kind === equipSlot ? { ...it, equipped: false } : { ...it }
+  ));
+}
+
 export function equippedId(inventory: readonly InventoryItem[], slot: "weapon" | "armor", content: Content): string | null {
-  const kind = slot === "weapon" ? "weapon" : "armor";
   return inventory.find((it) => {
-    if (!it.equipped) return false;
-    return content.items[it.id]?.kind === kind;
+    if (!it.equipped || it.count <= 0) return false;
+    return content.items[it.id]?.kind === slot;
   })?.id ?? null;
 }
